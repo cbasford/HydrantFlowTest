@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HydrantFlowLibrary.Models;
+using FlowTestLibrary.Models;
 
-namespace HydrantFlowTest
+namespace FlowTestLibrary
 {
     public class Methods
     {

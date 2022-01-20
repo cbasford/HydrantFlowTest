@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HydrantFlowLibrary.Models
+namespace FlowTestLibrary.Models
 {
     public class FlowTestModel
     {
