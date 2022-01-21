@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Dapper;
@@ -20,22 +18,21 @@ namespace DataAccessLibrary.DataAccess
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("@FlowTestId", flowTestDataModel.FlowTestId);
-			p.Add("@AssetRole", flowTestDataModel.AssetRole);
 			p.Add("@AssetRoleId", flowTestDataModel.AssetRoleId);
-			p.Add("@Asset", flowTestDataModel.Asset);
 			p.Add("@AssetTypeId", flowTestDataModel.AssetTypeId);
-			p.Add("@AssetId", flowTestDataModel.AssetId);
-			p.Add("@Nozzles", flowTestDataModel.Nozzles);
-			p.Add("@NozzleId", flowTestDataModel.NozzleId);
+			p.Add("@AssetNumber", flowTestDataModel.AssetNumber);
+			p.Add("@HydrantNozzleId", flowTestDataModel.HydrantNozzleId);
 			p.Add("@StaticPsi", flowTestDataModel.StaticPsi);
-			p.Add("@TestPsi", flowTestDataModel.TestPsi);
-			p.Add("@Flow", flowTestDataModel.Flow);
+			p.Add("@ResidualPsi", flowTestDataModel.ResidualPsi);
+			p.Add("@FlowGpm", flowTestDataModel.FlowGpm);
 			p.Add("@ModelStaticPsi", flowTestDataModel.ModelStaticPsi);
-			p.Add("@ModelTestPsi", flowTestDataModel.ModelTestPsi);
-			p.Add("@ModelFlow", flowTestDataModel.ModelFlow);
+			p.Add("@ModelResidualPsi", flowTestDataModel.ModelResidualPsi);
+			p.Add("@ModelFlowGpm", flowTestDataModel.ModelFlowGpm);
 			p.Add("@Elevation", flowTestDataModel.Elevation);
-			p.Add("@DischargeCoeff", flowTestDataModel.DischargeCoeff);
-			p.Add("@Multiplier", flowTestDataModel.Multiplier);
+			p.Add("@ErrorStaticPsi", flowTestDataModel.ErrorStaticPsi);
+			p.Add("@ErrorResidualPsi", flowTestDataModel.ErrorResidualPsi);
+			p.Add("@ErrorFlowGpm", flowTestDataModel.ErrorFlowGpm);
+			p.Add("@CorrectedErrorResidualPsi", flowTestDataModel.CorrectedErrorResidualPsi);
 
 			SqlDataAccess.SaveData(sql, p, connectionString, true);
 
@@ -49,22 +46,21 @@ namespace DataAccessLibrary.DataAccess
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("@FlowTestId", flowTestDataModel.FlowTestId);
-			p.Add("@AssetRole", flowTestDataModel.AssetRole);
 			p.Add("@AssetRoleId", flowTestDataModel.AssetRoleId);
-			p.Add("@Asset", flowTestDataModel.Asset);
 			p.Add("@AssetTypeId", flowTestDataModel.AssetTypeId);
-			p.Add("@AssetId", flowTestDataModel.AssetId);
-			p.Add("@Nozzles", flowTestDataModel.Nozzles);
-			p.Add("@NozzleId", flowTestDataModel.NozzleId);
+			p.Add("@AssetNumber", flowTestDataModel.AssetNumber);
+			p.Add("@HydrantNozzleId", flowTestDataModel.HydrantNozzleId);
 			p.Add("@StaticPsi", flowTestDataModel.StaticPsi);
-			p.Add("@TestPsi", flowTestDataModel.TestPsi);
-			p.Add("@Flow", flowTestDataModel.Flow);
+			p.Add("@ResidualPsi", flowTestDataModel.ResidualPsi);
+			p.Add("@FlowGpm", flowTestDataModel.FlowGpm);
 			p.Add("@ModelStaticPsi", flowTestDataModel.ModelStaticPsi);
-			p.Add("@ModelTestPsi", flowTestDataModel.ModelTestPsi);
-			p.Add("@ModelFlow", flowTestDataModel.ModelFlow);
+			p.Add("@ModelResidualPsi", flowTestDataModel.ModelResidualPsi);
+			p.Add("@ModelFlowGpm", flowTestDataModel.ModelFlowGpm);
 			p.Add("@Elevation", flowTestDataModel.Elevation);
-			p.Add("@DischargeCoeff", flowTestDataModel.DischargeCoeff);
-			p.Add("@Multiplier", flowTestDataModel.Multiplier);
+			p.Add("@ErrorStaticPsi", flowTestDataModel.ErrorStaticPsi);
+			p.Add("@ErrorResidualPsi", flowTestDataModel.ErrorResidualPsi);
+			p.Add("@ErrorFlowGpm", flowTestDataModel.ErrorFlowGpm);
+			p.Add("@CorrectedErrorResidualPsi", flowTestDataModel.CorrectedErrorResidualPsi);
 
 			await SqlDataAccess.SaveDataAsync(sql, p, connectionString, true);
 
@@ -77,9 +73,31 @@ namespace DataAccessLibrary.DataAccess
 
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("@FlowValveStatusId", flowTestModel.FlowValveStatusId);
+			p.Add("@ModelVersionId", flowTestModel.ModelVersionId);
+			p.Add("@Status", flowTestModel.Status);
 			p.Add("@TestName", flowTestModel.TestName);
 			p.Add("@TestDate", flowTestModel.TestDate);
-			p.Add("@TestCurrent", flowTestModel.TestCurrent);
+			p.Add("@PlanFlowDate", flowTestModel.PlanFlowDate);
+			p.Add("@Summary", flowTestModel.Summary);
+			p.Add("@Workorder", flowTestModel.Workorder);
+			p.Add("@TestBy", flowTestModel.TestBy);
+			p.Add("@DisplayMap", flowTestModel.DisplayMap);
+			p.Add("@SiteMap", flowTestModel.SiteMap);
+			p.Add("@SimlMap", flowTestModel.SimlMap);
+			p.Add("@TotalFlowGpm", flowTestModel.TotalFlowGpm);
+			p.Add("@TestDataFile", flowTestModel.TestDataFile);
+			p.Add("@MaxErrorStaticPsi", flowTestModel.MaxErrorStaticPsi);
+			p.Add("@AvgErrorStaticPsi", flowTestModel.AvgErrorStaticPsi);
+			p.Add("@MaxErrorResidualPsi", flowTestModel.MaxErrorResidualPsi);
+			p.Add("@AvgErrorResidualPsi", flowTestModel.AvgErrorResidualPsi);
+			p.Add("@FlowErrorGpm", flowTestModel.FlowErrorGpm);
+			p.Add("@VarErrorStaticPsi", flowTestModel.VarErrorStaticPsi);
+			p.Add("@VarErrorResidualPsi", flowTestModel.VarErrorResidualPsi);
+			p.Add("@ModelRevisionDate", flowTestModel.ModelRevisionDate);
+			p.Add("@Calculate", flowTestModel.Calculate);
+			p.Add("@MapScale", flowTestModel.MapScale);
+			p.Add("@CalcFlowAt20", flowTestModel.CalcFlowAt20);
 
 			SqlDataAccess.SaveData(sql, p, connectionString, true);
 
@@ -106,9 +124,31 @@ namespace DataAccessLibrary.DataAccess
 
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("@FlowValveStatusId", flowTestModel.FlowValveStatusId);
+			p.Add("@ModelVersionId", flowTestModel.ModelVersionId);
+			p.Add("@Status", flowTestModel.Status);
 			p.Add("@TestName", flowTestModel.TestName);
 			p.Add("@TestDate", flowTestModel.TestDate);
-			p.Add("@TestCurrent", flowTestModel.TestCurrent);
+			p.Add("@PlanFlowDate", flowTestModel.PlanFlowDate);
+			p.Add("@Summary", flowTestModel.Summary);
+			p.Add("@Workorder", flowTestModel.Workorder);
+			p.Add("@TestBy", flowTestModel.TestBy);
+			p.Add("@DisplayMap", flowTestModel.DisplayMap);
+			p.Add("@SiteMap", flowTestModel.SiteMap);
+			p.Add("@SimlMap", flowTestModel.SimlMap);
+			p.Add("@TotalFlowGpm", flowTestModel.TotalFlowGpm);
+			p.Add("@TestDataFile", flowTestModel.TestDataFile);
+			p.Add("@MaxErrorStaticPsi", flowTestModel.MaxErrorStaticPsi);
+			p.Add("@AvgErrorStaticPsi", flowTestModel.AvgErrorStaticPsi);
+			p.Add("@MaxErrorResidualPsi", flowTestModel.MaxErrorResidualPsi);
+			p.Add("@AvgErrorResidualPsi", flowTestModel.AvgErrorResidualPsi);
+			p.Add("@FlowErrorGpm", flowTestModel.FlowErrorGpm);
+			p.Add("@VarErrorStaticPsi", flowTestModel.VarErrorStaticPsi);
+			p.Add("@VarErrorResidualPsi", flowTestModel.VarErrorResidualPsi);
+			p.Add("@ModelRevisionDate", flowTestModel.ModelRevisionDate);
+			p.Add("@Calculate", flowTestModel.Calculate);
+			p.Add("@MapScale", flowTestModel.MapScale);
+			p.Add("@CalcFlowAt20", flowTestModel.CalcFlowAt20);
 
 			await SqlDataAccess.SaveDataAsync(sql, p, connectionString, true);
 
@@ -305,22 +345,21 @@ namespace DataAccessLibrary.DataAccess
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", flowTestDataModel.Id);
 			p.Add("@FlowTestId", flowTestDataModel.FlowTestId);
-			p.Add("@AssetRole", flowTestDataModel.AssetRole);
 			p.Add("@AssetRoleId", flowTestDataModel.AssetRoleId);
-			p.Add("@Asset", flowTestDataModel.Asset);
 			p.Add("@AssetTypeId", flowTestDataModel.AssetTypeId);
-			p.Add("@AssetId", flowTestDataModel.AssetId);
-			p.Add("@Nozzles", flowTestDataModel.Nozzles);
-			p.Add("@NozzleId", flowTestDataModel.NozzleId);
+			p.Add("@AssetNumber", flowTestDataModel.AssetNumber);
+			p.Add("@HydrantNozzleId", flowTestDataModel.HydrantNozzleId);
 			p.Add("@StaticPsi", flowTestDataModel.StaticPsi);
-			p.Add("@TestPsi", flowTestDataModel.TestPsi);
-			p.Add("@Flow", flowTestDataModel.Flow);
+			p.Add("@ResidualPsi", flowTestDataModel.ResidualPsi);
+			p.Add("@FlowGpm", flowTestDataModel.FlowGpm);
 			p.Add("@ModelStaticPsi", flowTestDataModel.ModelStaticPsi);
-			p.Add("@ModelTestPsi", flowTestDataModel.ModelTestPsi);
-			p.Add("@ModelFlow", flowTestDataModel.ModelFlow);
+			p.Add("@ModelResidualPsi", flowTestDataModel.ModelResidualPsi);
+			p.Add("@ModelFlowGpm", flowTestDataModel.ModelFlowGpm);
 			p.Add("@Elevation", flowTestDataModel.Elevation);
-			p.Add("@DischargeCoeff", flowTestDataModel.DischargeCoeff);
-			p.Add("@Multiplier", flowTestDataModel.Multiplier);
+			p.Add("@ErrorStaticPsi", flowTestDataModel.ErrorStaticPsi);
+			p.Add("@ErrorResidualPsi", flowTestDataModel.ErrorResidualPsi);
+			p.Add("@ErrorFlowGpm", flowTestDataModel.ErrorFlowGpm);
+			p.Add("@CorrectedErrorResidualPsi", flowTestDataModel.CorrectedErrorResidualPsi);
 
 			SqlDataAccess.SaveData(sql, p, connectionString, true);
 		}
@@ -332,22 +371,21 @@ namespace DataAccessLibrary.DataAccess
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", flowTestDataModel.Id);
 			p.Add("@FlowTestId", flowTestDataModel.FlowTestId);
-			p.Add("@AssetRole", flowTestDataModel.AssetRole);
 			p.Add("@AssetRoleId", flowTestDataModel.AssetRoleId);
-			p.Add("@Asset", flowTestDataModel.Asset);
 			p.Add("@AssetTypeId", flowTestDataModel.AssetTypeId);
-			p.Add("@AssetId", flowTestDataModel.AssetId);
-			p.Add("@Nozzles", flowTestDataModel.Nozzles);
-			p.Add("@NozzleId", flowTestDataModel.NozzleId);
+			p.Add("@AssetNumber", flowTestDataModel.AssetNumber);
+			p.Add("@HydrantNozzleId", flowTestDataModel.HydrantNozzleId);
 			p.Add("@StaticPsi", flowTestDataModel.StaticPsi);
-			p.Add("@TestPsi", flowTestDataModel.TestPsi);
-			p.Add("@Flow", flowTestDataModel.Flow);
+			p.Add("@ResidualPsi", flowTestDataModel.ResidualPsi);
+			p.Add("@FlowGpm", flowTestDataModel.FlowGpm);
 			p.Add("@ModelStaticPsi", flowTestDataModel.ModelStaticPsi);
-			p.Add("@ModelTestPsi", flowTestDataModel.ModelTestPsi);
-			p.Add("@ModelFlow", flowTestDataModel.ModelFlow);
+			p.Add("@ModelResidualPsi", flowTestDataModel.ModelResidualPsi);
+			p.Add("@ModelFlowGpm", flowTestDataModel.ModelFlowGpm);
 			p.Add("@Elevation", flowTestDataModel.Elevation);
-			p.Add("@DischargeCoeff", flowTestDataModel.DischargeCoeff);
-			p.Add("@Multiplier", flowTestDataModel.Multiplier);
+			p.Add("@ErrorStaticPsi", flowTestDataModel.ErrorStaticPsi);
+			p.Add("@ErrorResidualPsi", flowTestDataModel.ErrorResidualPsi);
+			p.Add("@ErrorFlowGpm", flowTestDataModel.ErrorFlowGpm);
+			p.Add("@CorrectedErrorResidualPsi", flowTestDataModel.CorrectedErrorResidualPsi);
 
 			await SqlDataAccess.SaveDataAsync(sql, p, connectionString, true);
 		}
@@ -358,9 +396,31 @@ namespace DataAccessLibrary.DataAccess
 
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", flowTestModel.Id);
+			p.Add("@FlowValveStatusId", flowTestModel.FlowValveStatusId);
+			p.Add("@ModelVersionId", flowTestModel.ModelVersionId);
+			p.Add("@Status", flowTestModel.Status);
 			p.Add("@TestName", flowTestModel.TestName);
 			p.Add("@TestDate", flowTestModel.TestDate);
-			p.Add("@TestCurrent", flowTestModel.TestCurrent);
+			p.Add("@PlanFlowDate", flowTestModel.PlanFlowDate);
+			p.Add("@Summary", flowTestModel.Summary);
+			p.Add("@Workorder", flowTestModel.Workorder);
+			p.Add("@TestBy", flowTestModel.TestBy);
+			p.Add("@DisplayMap", flowTestModel.DisplayMap);
+			p.Add("@SiteMap", flowTestModel.SiteMap);
+			p.Add("@SimlMap", flowTestModel.SimlMap);
+			p.Add("@TotalFlowGpm", flowTestModel.TotalFlowGpm);
+			p.Add("@TestDataFile", flowTestModel.TestDataFile);
+			p.Add("@MaxErrorStaticPsi", flowTestModel.MaxErrorStaticPsi);
+			p.Add("@AvgErrorStaticPsi", flowTestModel.AvgErrorStaticPsi);
+			p.Add("@MaxErrorResidualPsi", flowTestModel.MaxErrorResidualPsi);
+			p.Add("@AvgErrorResidualPsi", flowTestModel.AvgErrorResidualPsi);
+			p.Add("@FlowErrorGpm", flowTestModel.FlowErrorGpm);
+			p.Add("@VarErrorStaticPsi", flowTestModel.VarErrorStaticPsi);
+			p.Add("@VarErrorResidualPsi", flowTestModel.VarErrorResidualPsi);
+			p.Add("@ModelRevisionDate", flowTestModel.ModelRevisionDate);
+			p.Add("@Calculate", flowTestModel.Calculate);
+			p.Add("@MapScale", flowTestModel.MapScale);
+			p.Add("@CalcFlowAt20", flowTestModel.CalcFlowAt20);
 
 			SqlDataAccess.SaveData(sql, p, connectionString, true);
 
@@ -385,9 +445,31 @@ namespace DataAccessLibrary.DataAccess
 
 			DynamicParameters p = new DynamicParameters();
 			p.Add("@Id", flowTestModel.Id);
+			p.Add("@FlowValveStatusId", flowTestModel.FlowValveStatusId);
+			p.Add("@ModelVersionId", flowTestModel.ModelVersionId);
+			p.Add("@Status", flowTestModel.Status);
 			p.Add("@TestName", flowTestModel.TestName);
 			p.Add("@TestDate", flowTestModel.TestDate);
-			p.Add("@TestCurrent", flowTestModel.TestCurrent);
+			p.Add("@PlanFlowDate", flowTestModel.PlanFlowDate);
+			p.Add("@Summary", flowTestModel.Summary);
+			p.Add("@Workorder", flowTestModel.Workorder);
+			p.Add("@TestBy", flowTestModel.TestBy);
+			p.Add("@DisplayMap", flowTestModel.DisplayMap);
+			p.Add("@SiteMap", flowTestModel.SiteMap);
+			p.Add("@SimlMap", flowTestModel.SimlMap);
+			p.Add("@TotalFlowGpm", flowTestModel.TotalFlowGpm);
+			p.Add("@TestDataFile", flowTestModel.TestDataFile);
+			p.Add("@MaxErrorStaticPsi", flowTestModel.MaxErrorStaticPsi);
+			p.Add("@AvgErrorStaticPsi", flowTestModel.AvgErrorStaticPsi);
+			p.Add("@MaxErrorResidualPsi", flowTestModel.MaxErrorResidualPsi);
+			p.Add("@AvgErrorResidualPsi", flowTestModel.AvgErrorResidualPsi);
+			p.Add("@FlowErrorGpm", flowTestModel.FlowErrorGpm);
+			p.Add("@VarErrorStaticPsi", flowTestModel.VarErrorStaticPsi);
+			p.Add("@VarErrorResidualPsi", flowTestModel.VarErrorResidualPsi);
+			p.Add("@ModelRevisionDate", flowTestModel.ModelRevisionDate);
+			p.Add("@Calculate", flowTestModel.Calculate);
+			p.Add("@MapScale", flowTestModel.MapScale);
+			p.Add("@CalcFlowAt20", flowTestModel.CalcFlowAt20);
 
 			await SqlDataAccess.SaveDataAsync(sql, p, connectionString, true);
 
@@ -436,13 +518,13 @@ namespace DataAccessLibrary.DataAccess
 			{
 				if ( testData.Id == 0 )
 				{
-					flowTestModel.TestData.Remove(testData);
+					_ = flowTestModel.TestData.Remove(testData);
 				}
 				else
 				{
 					testData.FlowTestId = flowTestModel.Id;
 					DeleteFlowTestDataModel(testData, connectionString);
-					flowTestModel.TestData.Remove(testData);
+					_ = flowTestModel.TestData.Remove(testData);
 				}
 			}
 
@@ -460,14 +542,14 @@ namespace DataAccessLibrary.DataAccess
 			{
 				if ( testData.Id == 0 )
 				{
-					flowTestModel.TestData.Remove(testData);
+					_ = flowTestModel.TestData.Remove(testData);
 				}
 				else
 				{
 					testData.FlowTestId = flowTestModel.Id;
 					// TODO -- modify for distributed processing to collect the tasks and await all
 					await DeleteFlowTestDataModelAsync(testData, connectionString);
-					flowTestModel.TestData.Remove(testData);
+					_ = flowTestModel.TestData.Remove(testData);
 				}
 			}
 

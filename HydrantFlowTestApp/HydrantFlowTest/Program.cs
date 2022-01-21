@@ -8,7 +8,9 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Drawing;
 using Microsoft.Office.Core;
 
-using DataAccessLibrary.DataModels;
+using DataAccessLibrary.DataAccess;
+
+using HydrantFlowTest.Models;
 
 namespace HydrantFlowTest
 {

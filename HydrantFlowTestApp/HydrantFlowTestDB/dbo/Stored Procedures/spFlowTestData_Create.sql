@@ -7,22 +7,21 @@ CREATE PROCEDURE [dbo].[spFlowTestData_Create]
 	-- Add the parameters for the stored procedure here
 	@Id INT = 0 OUTPUT,
 	@FlowTestId INT,
-	@AssetRole NVARCHAR(50),
 	@AssetRoleId INT,
-	@Asset NVARCHAR(200),
 	@AssetTypeId INT,
-	@AssetId INT,
-	@Nozzles nvarchar(100),
-	@NozzleId INT,
+	@AssetNumber INT,
+	@HydrantNozzleId INT,
 	@StaticPsi FLOAT,
-	@TestPsi FLOAT,
-	@Flow FLOAT,
+	@ResidualPsi FLOAT,
+	@FlowGpm FLOAT,
 	@ModelStaticPsi FLOAT,
-	@ModelTestPsi FLOAT,
-	@ModelFlow FLOAT,
+	@ModelResidualPsi FLOAT,
+	@ModelFlowGpm FLOAT,
 	@Elevation FLOAT,
-	@DischargeCoeff FLOAT,
-	@Multiplier FLOAT
+	@ErrorStaticPsi FLOAT,
+	@ErrorResidualPsi FLOAT,
+	@ErrorFlowGpm FLOAT,
+	@CorrectedErrorResidualPsi FLOAT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,40 +31,38 @@ BEGIN
 	-- Insert statements for procedure here
 	INSERT INTO [dbo].[FlowTestData] (
 		[FlowTestId],
-		[AssetRole],
 		[AssetRoleId],
-		[Asset],
 		[AssetTypeId],
-		[AssetId],
-		[Nozzles],
-		[NozzleId], 
+		[AssetNumber],
+		[HydrantNozzleId],
 		[StaticPsi],
-		[TestPsi],
-		[Flow],
+		[ResidualPsi],
+		[FlowGpm],
 		[ModelStaticPsi],
-		[ModelTestPsi],
-		[ModelFlow],
+		[ModelResidualPsi],
+		[ModelFlowGpm],
+		[ErrorStaticPsi],
+		[ErrorResidualPsi],
+		[ErrorFlowGpm],
 		[Elevation],
-		[DischargeCoeff],
-		[Multiplier]
+		[CorrectedErrorResidualPsi]
 	) VALUES (
 		@FlowTestId,
-		@AssetRole,
 		@AssetRoleId,
-		@Asset,
 		@AssetTypeId,
-		@AssetId,
-		@Nozzles,
-		@NozzleId,
+		@AssetNumber,
+		@HydrantNozzleId,
 		@StaticPsi,
-		@TestPsi,
-		@Flow,
+		@ResidualPsi,
+		@FlowGpm,
 		@ModelStaticPsi,
-		@ModelTestPsi,
-		@ModelFlow,
+		@ModelResidualPsi,
+		@ModelFlowGpm,
+		@ErrorStaticPsi,
+		@ErrorResidualPsi,
+		@ErrorFlowGpm,
 		@Elevation,
-		@DischargeCoeff,
-		@Multiplier
+		@CorrectedErrorResidualPsi
 	);
 
 	SELECT @Id = SCOPE_IDENTITY();

@@ -15,22 +15,21 @@ BEGIN
 	-- Insert statements for procedure here
 	SELECT [Id],
 		[FlowTestId],
-		[AssetRole],
 		[AssetRoleId],
-		[Asset],
 		[AssetTypeId],
-		[AssetId],
-		[Nozzles],
-		[NozzleId],
+		[AssetNumber],
+		[HydrantNozzleId],
 		[StaticPsi],
-		[TestPsi],
-		[Flow],
+		[ResidualPsi],
+		[FlowGpm],
 		[ModelStaticPsi],
-		[ModelTestPsi],
-		[ModelFlow],
+		[ModelResidualPsi],
+		[ModelFlowGpm],
+		[ErrorStaticPsi],
+		[ErrorResidualPsi],
+		[ErrorFlowGpm],
 		[Elevation],
-		[DischargeCoeff],
-		[Multiplier]
+		[CorrectedErrorResidualPsi]
 	FROM [dbo].[FlowTestData]
 	WHERE [Id] = @Id;
 END

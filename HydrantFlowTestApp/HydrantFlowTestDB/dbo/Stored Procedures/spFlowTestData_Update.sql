@@ -7,22 +7,21 @@ CREATE PROCEDURE [dbo].[spFlowTestData_Update]
 	-- Add the parameters for the stored procedure here
 	@Id INT,
 	@FlowTestId INT,
-	@AssetRole NVARCHAR(50),
 	@AssetRoleId INT,
-	@Asset NVARCHAR(200),
 	@AssetTypeId INT,
-	@AssetId INT,
-	@Nozzles nvarchar(100),
-	@NozzleId INT,
+	@AssetNumber INT,
+	@HydrantNozzleId INT,
 	@StaticPsi FLOAT,
-	@TestPsi FLOAT,
-	@Flow FLOAT,
+	@ResidualPsi FLOAT,
+	@FlowGpm FLOAT,
 	@ModelStaticPsi FLOAT,
-	@ModelTestPsi FLOAT,
-	@ModelFlow FLOAT,
+	@ModelResidualPsi FLOAT,
+	@ModelFlowGpm FLOAT,
 	@Elevation FLOAT,
-	@DischargeCoeff FLOAT,
-	@Multiplier FLOAT
+	@ErrorStaticPsi FLOAT,
+	@ErrorResidualPsi FLOAT,
+	@ErrorFlowGpm FLOAT,
+	@CorrectedErrorResidualPsi FLOAT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,22 +31,21 @@ BEGIN
 	-- Insert statements for procedure here
 	UPDATE [dbo].[FlowTestData]
 	SET [FlowTestId] = @FlowTestId,
-		[AssetRole] = @AssetRole,
 		[AssetRoleId] = @AssetRoleId,
-		[Asset] = @Asset,
 		[AssetTypeId] = @AssetTypeId,
-		[AssetId] = @AssetId,
-		[Nozzles] = @Nozzles,
-		[NozzleId] = @NozzleId,
+		[AssetNumber] = @AssetNumber,
+		[HydrantNozzleId] = @HydrantNozzleId,
 		[StaticPsi] = @StaticPsi,
-		[TestPsi] = @TestPsi,
-		[Flow] = @Flow,
+		[ResidualPsi] = @ResidualPsi,
+		[FlowGpm] = @FlowGpm,
 		[ModelStaticPsi] = @ModelStaticPsi,
-		[ModelTestPsi] = @ModelTestPsi,
-		[ModelFlow] = @ModelFlow,
+		[ModelResidualPsi] = @ModelResidualPsi,
+		[ModelFlowGpm] = @ModelFlowGpm,
+		[ErrorStaticPsi] = @ErrorStaticPsi,
+		[ErrorResidualPsi] = @ErrorResidualPsi,
+		[ErrorFlowGpm] = @ErrorFlowGpm,
 		[Elevation] = @Elevation,
-		[DischargeCoeff] = @DischargeCoeff,
-		[Multiplier] = @Multiplier
+		[CorrectedErrorResidualPsi] = @CorrectedErrorResidualPsi
 	WHERE [Id] = @Id;
 END
 GO

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DataAccessLibrary.DataModels;
+using DataAccessLibrary.DataAccess;
+
+using HydrantFlowTest.Models;
 
 namespace HydrantFlowTest
 {

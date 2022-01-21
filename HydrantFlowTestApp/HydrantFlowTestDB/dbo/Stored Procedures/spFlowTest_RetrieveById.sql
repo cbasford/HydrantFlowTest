@@ -14,9 +14,31 @@ BEGIN
 
 	-- Insert statements for procedure here
 	SELECT [Id],
+		[FlowValveStatusId],
+		[ModelVersionId],
+		[Status],
 		[TestName],
 		[TestDate],
-		[TestCurrent]
+		[PlanFlowDate],
+		[Summary],
+		[Workorder],
+		[TestBy],
+		[DisplayMap],
+		[SiteMap],
+		[SimlMap],
+		[TotalFlowGpm],
+		[TestDataFile],
+		[MaxErrorStaticPsi],
+		[AvgErrorStaticPsi],
+		[MaxErrorResidualPsi],
+		[AvgErrorResidualPsi],
+		[FlowErrorGpm],
+		[VarErrorStaticPsi],
+		[VarErrorResidualPsi],
+		[ModelRevisionDate],
+		[Calculate],
+		[MapScale],
+		[CalcFlowAt20]
 	FROM [dbo].[FlowTest]
 	WHERE [Id] = @Id;
 END
